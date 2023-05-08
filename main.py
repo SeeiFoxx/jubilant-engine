@@ -98,40 +98,43 @@ def choix_tutoriel():
 	# Initialise l'horloge de Pygame
 	clock = pygame.time.Clock()
 	# Police de caractères
-	font_undertext = pygame.font.Font('police.ttf', 30)
-	font_bouton = pygame.font.Font('police.ttf', 40)
+	font_undertext = pygame.font.Font('police.ttf', 23)
+	font_bouton = pygame.font.Font('police.ttf', 55)
 	font_title = pygame.font.Font('police.ttf', 45)
 	# Boutons
-	bouton_debutant = font.render("Débutant", True, noir)
-	bouton_debutant_rect = pygame.Rect(int(fenetre[0] - bouton_debutant.get_width() / 2), 250, bouton_debutant.get_width() + 10, bouton_debutant.get_height() + 10)
-	bouton_apprenti = font.render("Apprenti", True, noir)
-	bouton_apprenti_rect = pygame.Rect(int(fenetre[0] - bouton_apprenti.get_width() / 2), 400, bouton_apprenti.get_width() + 10, bouton_apprenti.get_height() + 10)
-	bouton_confirme = font.render("Confirmé", True, noir)
-	bouton_confirme_rect = pygame.Rect(int(fenetre[0] - bouton_confirme.get_width() / 2), 250, bouton_confirme.get_width() + 10, bouton_confirme.get_height() + 10)
-	bouton_expert = font.render("Expert", True, noir)
-	bouton_expert_rect = pygame.Rect(int(fenetre[0] - bouton_expert.get_width() / 2), 250, bouton_expert.get_width() + 10, bouton_expert.get_height() + 10)
+	bouton_debutant = font_bouton.render("Débutant", True, noir)
+	bouton_debutant_rect = pygame.Rect(int((fenetre[0] - bouton_debutant.get_width()) / 2), 250, bouton_debutant.get_width() + 10, bouton_debutant.get_height() + 10)
+	bouton_apprenti = font_bouton.render("Apprenti", True, noir)
+	bouton_apprenti_rect = pygame.Rect(int((fenetre[0] - bouton_apprenti.get_width()) / 2), 400, bouton_apprenti.get_width() + 10, bouton_apprenti.get_height() + 10)
+	bouton_confirme = font_bouton.render("Confirmé", True, noir)
+	bouton_confirme_rect = pygame.Rect(int((fenetre[0] - bouton_confirme.get_width()) / 2), 550, bouton_confirme.get_width() + 10, bouton_confirme.get_height() + 10)
+	bouton_expert = font_bouton.render("Expert", True, noir)
+	bouton_expert_rect = pygame.Rect(int((fenetre[0] - bouton_expert.get_width()) / 2), 700, bouton_expert.get_width() + 10, bouton_expert.get_height() + 10)
 	pygame.draw.rect(screen, or_, bouton_debutant_rect, 0, 10)
 	pygame.draw.rect(screen, or_, bouton_apprenti_rect, 0, 10)
 	pygame.draw.rect(screen, or_, bouton_confirme_rect, 0, 10)
 	pygame.draw.rect(screen, or_, bouton_expert_rect, 0, 10)
 	# Textes
-	text_tech_1 = font.render("Ce jeu sera assez technique, c'est pourquoi on vous propose un petit tutoriel avant de commencer.", True, blanc)
-	text_tech_2 = font.render("Choisissez votre niveau en terme de connaissances:", True, blanc)
+	text_tech_1 = font_title.render("Ce jeu sera assez technique, c'est pourquoi on vous propose un petit tutoriel avant de commencer.", True, blanc)
+	text_tech_2 = font_title.render("Choisissez votre niveau en terme de connaissances:", True, blanc)
 	text_tech_rect_1 = text_tech_1.get_rect()
 	text_tech_rect_1.center = (fenetre[0] / 2, fenetre[1] - 100)
 	text_tech_rect_2 = text_tech_2.get_rect()
 	text_tech_rect_2.center = (fenetre[0] / 2, fenetre[1] - 105 - text_tech_2.get_width())
-	text_debutant = font.render("Choisissez votre niveau en terme de connaissances:", True, blanc)
-	text_apprenti = font.render("Choisissez votre niveau en terme de connaissances:", True, blanc)
-	text_confirme = font.render("Choisissez votre niveau en terme de connaissances:", True, blanc)
-	text_expert = font.render("Choisissez votre niveau en terme de connaissances:", True, blanc)
-	#XXXACOMPLETER
+	text_debutant = font_undertext.render("C'est quoi la blockchain?", True, blanc)
+	text_apprenti = font_undertext.render("J'ai besoin d'éclaircissements.", True, blanc)
+	text_confirme = font_undertext.render("Je suis à l'aise.", True, blanc)
+	text_expert = font_undertext.render("Le gameplay, directement!", True, blanc)
+	text_debutant_rect = text_debutant.get_rect()
+	text_debutant_rect.center = (fenetre[0] / 2, bouton_debutant_rect.y + 10 + bouton_debutant.get_height() + text_debutant.get_height())
+	text_apprenti_rect = text_apprenti.get_rect()
+	text_apprenti_rect.center = (fenetre[0] / 2, bouton_apprenti_rect.y + 10 + bouton_apprenti.get_height() + text_apprenti.get_height())
+	text_confirme_rect = text_confirme.get_rect()
+	text_confirme_rect.center = (fenetre[0] / 2, bouton_confirme_rect.y + 10 + bouton_confirme.get_height() + text_confirme.get_height())
+	text_expert_rect = text_expert.get_rect()
+	text_expert_rect.center = (fenetre[0] / 2, bouton_expert_rect.y + 10 + bouton_expert.get_height() + text_expert.get_height())
 	continuer = True
 	while continuer:
-		text_debutant = ""
-		text_apprenti = ""
-		text_confirme = ""
-		text_expert = ""
 		# Affichage des boutons
 		screen.blit(bouton_debutant, (bouton_debutant_rect.x + 5, bouton_debutant_rect.y + 5))
 		screen.blit(bouton_apprenti, (bouton_apprenti_rect.x + 5, bouton_apprenti_rect.y + 5))
@@ -140,15 +143,40 @@ def choix_tutoriel():
 		# Affichage des textes
 		screen.blit(text_tech_1, text_tech_rect_1)
 		screen.blit(text_tech_2, text_tech_rect_2)
-		# Si le joueur veut quitter le jeu quitte
+		screen.blit(text_debutant, text_debutant_rect)
+		screen.blit(text_apprenti, text_apprenti_rect)
+		screen.blit(text_confirme, text_confirme_rect)
+		screen.blit(text_expert, text_expert_rect)
 		for event in pygame.event.get():
+			# Si le joueur veut quitter, le jeu quitte
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				exit()
+			# Si un bouton est cliqué,
+			elif event.type == pygame.MOUSEBUTTONDOWN:
+				# Pour chaque bouton respectif,
+				if bouton_debutant_rect.collidepoint(event.pos):
+        			# On arrête le while et on va définir le niveau du joueur
+					continuer = False
+					niveau = 0
+				elif bouton_apprenti_rect.collidepoint(event.pos):
+					# On arrête le while et on va définir le niveau du joueur
+					continuer = False
+					niveau = 1
+				elif bouton_confirme_rect.collidepoint(event.pos):
+        			# On arrête le while et on va définir le niveau du joueur
+					continuer = False
+					niveau = 2
+				elif bouton_expert_rect.collidepoint(event.pos):
+        			# On arrête le while et on va définir le niveau du joueur
+					continuer = False
+					niveau = 3
 		# Rafraîchissement de la fenêtre
 		pygame.display.update()
 		# Limite de FPS à 60
 		clock.tick(60)
+	# Une fois la boucle while terminée, on retourne le niveau du joueur
+	return(niveau)
 
 
 
@@ -165,7 +193,7 @@ def tutoriel(page = 0):
 	# Titre et contenu des différentes pages
 	contenu_pages = {
 	"Niveau Grand-mère:": """
-Voici une version très simplifiée des concepts nécessaires pour manier le jeu. Vous pourrez toujours revenir à ce tutoriel. Si vous avez aimé le tutoriel une fois terminé, n'hésitez pas à explorer les différents niveaux de difficultés en cliquant sur le bouton en haut à droite pour changer de difficulté. Naviguez entre les pages du tutoriel avec les boutons, ou bien avec les flèches gauche et droite de votre clavier.
+Voici une version très simplifiée des concepts nécessaires pour manier le jeu. Vous pourrez toujours revenir à ce tutoriel. Si vous avez aimé le tutoriel une fois terminé, n'hésitez pas à explorer les différents niveaux de difficultés en cliquant sur le bouton "Suivant" en bas à droite pour changer de difficulté. Naviguez entre les pages du tutoriel avec les boutons, ou bien avec les flèches gauche et droite de votre clavier.
 
 Une cryptomonnaie est une forme de monnaie numérique. Cela signifie que vous ne pouvez pas la toucher ou la voir en personne, mais vous pouvez l'utiliser pour acheter des biens et des services en ligne.
 C'est comme si vous aviez de l'argent dans un portefeuille électronique sur votre téléphone, mais au lieu d'utiliser des euros ou des dollars, vous utilisez une monnaie numérique spéciale appelée "cryptomonnaie". Il y a plusieurs cryptomonnaies comme le Bitocin, l'Ethereum ou le Litecoin.
@@ -418,23 +446,30 @@ def init():
 	blanc = (255, 255, 255)
 	noir = (0, 0, 0)
 	or_ = (228, 192, 27)
+	# Couleur pour les éléments sélectionnées et non sélectionnées,  couleur d'arrière plan et couleur de texte
 	selected_color = noir
 	selected_bg_color = or_
 	unselected_color = blanc
 	unselected_bg_color = noir
-	# Affiche l'écran de chargement deux fois
+	# Affiche l'écran de chargement deux fois, car il est rapide
 	for i in range(2):
 		chargement()
-	# Réinitialise l'écran
+	# Pendant ce temps, réinitialise l'écran
 	screen.fill(noir)
 	pygame.display.update()
 	# Préviens et lance la musique
 	musique()
 	# Détecte si le jeu est lancé pour la première fois, si oui affiche le tutoriel
 	if tutoriel_:
-		#XXXACOMPLETER
+		# On met sl'écran pour choisir le nieavu de difficulté du tutoriel
 		niveau = choix_tutoriel()
-		tutoriel(page)
+		# Si nieavu 0 ou 1, le tutoriel est de ce niveau
+		if (niveau == 0) or (niveau == 1):
+			tutoriel(niveau)
+		# Si niveau confirmé, le tutoriel amène à la troisième page (car le tutoriel apprenti prends deux pages donc 2+1)
+		elif niveau == 2:
+			tutoriel(3)
+		# Pour le niveau 3 expert, pas de tutoriel directement la suite, et pour tous les niveaux la suite aussi
 		tutoriel_suite(niveau)
 	# Après le tutoriel ou en l'abscence de tutoriel, on lance le menu principal
 	main_menu()
