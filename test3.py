@@ -292,7 +292,7 @@ def main_menu():
                     chart[-1] = current_crypto.prix
         # Mise à jour du prix de chaque monnaie, de l'inflation et des évènements
         for monnaie in liste_monnaies:
-            monanie.faire_varier_prix()
+            monnaie.faire_varier_prix()
             monnaie.money_printer_go_brr()
             event = monnaie.evenement_aleatoire() 
             # Si un évènement a eu lieu,
