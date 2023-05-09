@@ -247,15 +247,15 @@ def main_menu_init():
     police = pygame.font.Font('police.ttf', 25)
     # Création de toutes les cryptomononnaies
     Dollar = Monnaie("Dollar", "USD", 1, 0)
-    Euro = ("Euro", "EUR", 1.2, 0)
-    Bitcoin = ("Bitcoin", "BTC", 50000, 0.2)
-    Ethereum = ("Ethereum", "ETH", 2000, 0.7)
-    Litecoin = ("Litecoin", "LTC", 100, 1.4)
-    Dogecoin = ("Dogecoin", "DOGE", 0.2, 5)
-    Shiba = ("Shiba", "INU", 0.02, 50)
-    IOTA = ("IOTA", "IOTA", 2.6, 2.3)
-    Ergo = ("Ergo", "ERGO", 14, 1.7)
-    Isotopec = ("Isotopec", "ISO", 0.009, 2.7)
+    Euro = Monnaie("Euro", "EUR", 1.2, 0)
+    Bitcoin = Monnaie("Bitcoin", "BTC", 50000, 0.2)
+    Ethereum = Monnaie("Ethereum", "ETH", 2000, 0.7)
+    Litecoin = Monnaie("Litecoin", "LTC", 100, 1.4)
+    Dogecoin = Monnaie("Dogecoin", "DOGE", 0.2, 5)
+    Shiba = Monnaie("Shiba", "INU", 0.02, 50)
+    IOTA = Monnaie("IOTA", "IOTA", 2.6, 2.3)
+    Ergo = Monnaie("Ergo", "ERGO", 14, 1.7)
+    Isotopec = Monnaie("Isotopec", "ISO", 0.009, 2.7)
     # Création de la liste des monnaies
     liste_monnaies = [Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec]
     # Cyrpto dont le grpahe est actuellement affiché
