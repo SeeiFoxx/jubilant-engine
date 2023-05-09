@@ -238,7 +238,6 @@ def main_menu_init():
     # Définition de la police de caractères
     police = pygame.font.Font('police.ttf', 25)
     # Création de toutes les cryptomononnaies
-    liste_monnaies = [Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec]
     Dollar = Monnaie("Dollar", "USD", 1, 0)
     Euro = ("Euro", "EUR", 1.2, 0)
     Bitcoin = ("Bitcoin", "BTC", 50000, 0.2)
@@ -249,6 +248,8 @@ def main_menu_init():
     IOTA = ("IOTA", "IOTA", 2.6, 2.3)
     Ergo = ("Ergo", "ERGO", 14, 1.7)
     Isotopec = ("Isotopec", "ISO", 0.009, 2.7)
+    # Création de la liste des monnaies
+    liste_monnaies = [Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec]
     # Cyrpto dont le grpahe est actuellement affiché
     current_crypto = Bitcoin
     # Définition des variables pour la charte de trading
