@@ -209,9 +209,9 @@ def draw_player_screen(screen):
     somme_monnaie_fiat_pycoin = Dollar.portefeuille_pycoin + (Euro.portefeuille_pycoin * Euro.prix)
     total = somme_monaie_crypto + somme_monnaie_fiat
     total_pycoin = somme_monaie_crypto_pycoin + somme_monnaie_fiat_pycoin
-    somme_monaie_crypto_empruntee = 0
+    somme_monnaie_crypto_empruntee = 0
     for crypto in liste_monnaies[2:]:
-        somme_monaie_crypto_empruntee += crypto.prix * crypto.emprunte
+        somme_monnaie_crypto_empruntee += crypto.prix * crypto.emprunte
     somme_monnaie_fiat_empruntee = Dollar.emprunte + (Euro.emprunte * Euro.prix)
     total_emprunte = somme_monnaie_crypto_empruntee + somme_monnaie_fiat_empruntee
     # Affichage des totaux
