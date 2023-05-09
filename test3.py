@@ -187,7 +187,7 @@ def draw_chart(screen, chart, color):
 # Définition de la fonction pour dessiner l'écran du joueur
 def draw_player_screen(screen):
     # affiche le menu de gauche avec les portefeuilles
-    pygame.draw.rect(screen, blanc, [0, 0, 450, fenetre[1]])
+    pygame.draw.rect(screen, blanc, [1420, 0, 450, fenetre[1]])
     text1 = police.render('Solde ...', True, noir)
     screen.blit(text1, [10, 25])
     text2 = police.render('Pycoin | Perso | Emprunté', True, noir)
@@ -303,7 +303,7 @@ def main_menu():
                 screen.blit(notification, (notification_rect.x + 5, notification_rect.y + 5))
                 # Attends trois secondes, puis la notification disparait
                 pygame.time.wait(3000)
-        # Affichage de l'interface utilisateur droite
+        # Affichage de l'interface utilisateur gauche
         pygame.draw.rect(screen, blanc, [0, 0, 500, 1080])
         # Affichage des boutons des monnaies dans la barre
         i = 0
