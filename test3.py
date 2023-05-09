@@ -290,6 +290,8 @@ def main_menu():
                     current_crypto = X
                     chart = current_crypto.historique_prix
                     chart[-1] = current_crypto.prix
+        # Réinitialise l'écran
+        screen.fill(noir)
         # Mise à jour du prix de chaque monnaie, de l'inflation et des évènements
         for monnaie in liste_monnaies:
             monnaie.faire_varier_prix()
@@ -318,7 +320,6 @@ def main_menu():
         chart.pop(0)
         chart.append(current_crypto.prix)
         # Dessin de l'écran de jeu
-        screen.fill(noir)
         draw_chart(screen, chart, blanc)
         draw_player_screen(screen)
 
