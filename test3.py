@@ -287,7 +287,7 @@ def main_menu():
             # Si un évènement a eu lieu,
             if event != False:
                 notification = police.render("Évènement sur "+str(monnaie.nom_court)+":\n"+str(event[0])+"\nInfluence + "+str(event[1] * 100)+" %.", True, noir)
-	            notification_rect = pygame.Rect(int((fenetre[0] - notification.get_width()) / 2), 25, notification.get_width() + 25, notification.get_height() + 25)
+                notification_rect = pygame.Rect(int((fenetre[0] - notification.get_width()) / 2), 25, notification.get_width() + 25, notification.get_height() + 25)
                 pygame.draw.rect(screen, or_, notification_rect, 0, 25)
                 screen.blit(notification, (notification_rect.x + 5, notification_rect.y + 5))
                 # Attends trois secondes, puis la notification disparait
