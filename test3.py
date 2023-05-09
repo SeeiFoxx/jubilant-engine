@@ -187,7 +187,7 @@ def draw_chart(screen, chart, color):
 # Définition de la fonction pour dessiner l'écran du joueur
 def draw_player_screen(screen):
     # affiche le menu de gauche avec les portefeuilles
-    pygame.draw.rect(screen, blanc, [fenetre[1] - 300, 0, fenetre[1], fenetre[0]])
+    pygame.draw.rect(screen, blanc, [fenetre[1] - 300, 0, 450, fenetre[0]])
     text1 = police.render('Solde ...', True, noir)
     screen.blit(text1, [fenetre[1] - 280, 25])
     text2 = police.render('Pycoin | Perso | Emprunté', True, noir)
@@ -299,7 +299,7 @@ def main_menu():
             if event != False:
                 notification = police.render("Évènement sur "+str(monnaie.nom_court)+":\n"+str(event[0])+"\nInfluence + "+str(event[1] * 100)+" %.", True, noir)
                 notification_rect = pygame.Rect(int((fenetre[0] - notification.get_width()) / 2), 25, notification.get_width() + 25, notification.get_height() + 25)
-                pygame.draw.rect(screen, or_, notification_rect, 0, 25)
+                pygame.draw.rect(screen, blanc, notification_rect, 0, 25)
                 screen.blit(notification, (notification_rect.x + 5, notification_rect.y + 5))
                 # Attends trois secondes, puis la notification disparait
                 pygame.time.wait(3000)
@@ -308,9 +308,9 @@ def main_menu():
         # Affichage des boutons des monnaies dans la barre
         i = 0
         for monnaie in liste_monnaies:
-            monnaie_bouton = police.render(monnaie.nom_court, True, or_)
+            monnaie_bouton = police.render(monnaie.nom_court, True, noir)
             monnaie_bouton_rect = pygame.Rect(10, (50 + i * 50), monnaie_bouton.get_width() + 10, monnaie_bouton.get_height() + 10)
-            pygame.draw.rect(screen, noir, monnaie_bouton_rect, 0, 10)
+            pygame.draw.rect(screen, blanc, monnaie_bouton_rect, 0, 10)
             screen.blit(monnaie_bouton, (monnaie_bouton_rect.x + 5, monnaie_bouton_rect.y + 5))
             i += 1
        
@@ -319,7 +319,7 @@ def main_menu():
         chart.append(current_crypto.prix)
         # Dessin de l'écran de jeu
         screen.fill(noir)
-        draw_chart(screen, chart, or_)
+        draw_chart(screen, chart, blanc)
         draw_player_screen(screen)
 
         # Actualisation de la fenêtre de jeu
