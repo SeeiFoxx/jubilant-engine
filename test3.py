@@ -87,7 +87,7 @@ class Monnaie:
         # On enlève les coins vendus du portefeuille de cette monnaie
         self.portefeuille -= quantite
         # On mets les coins achetés dans le portefeuille de l'autre monnaie
-        monnaie2.portfeuille += prix_total_vente/ monnaie2.prix
+        monnaie2.portefeuille += prix_total_vente/ monnaie2.prix
     
     # S'occupe de faire varier le prix d'une monnaie en fonction de sa volatilité
     def faire_varier_prix(self):
@@ -134,7 +134,7 @@ class Monnaie:
             return(False)
         else:
             monnaie.emprunt -= int(montant)
-            monnaie.portfeuille_pycoin += int(montant)
+            monnaie.portefeuille_pycoin += int(montant)
             monnaie.portefeuille -= int(montant)
             return(True)
 
@@ -205,8 +205,8 @@ def draw_player_screen(screen):
     somme_monaie_crypto_pycoin = 0
     for crypto in liste_monnaies[2:]:
         somme_monaie_crypto_pycoin += crypto.prix * crypto.portefeuille_pycoin
-    somme_monnaie_fiat = Dollar.portefeuille + (Euro.portfeuille * Euro.prix)
-    somme_monnaie_fiat_pycoin = Dollar.portefeuille_pycoin + (Euro.portfeuille_pycoin * Euro.prix)
+    somme_monnaie_fiat = Dollar.portefeuille + (Euro.portefeuille * Euro.prix)
+    somme_monnaie_fiat_pycoin = Dollar.portefeuille_pycoin + (Euro.portefeuille_pycoin * Euro.prix)
     total = somme_monaie_crypto + somme_monnaie_fiat
     total_pycoin = somme_monaie_crypto_pycoin + somme_monnaie_fiat_pycoin
     somme_monaie_crypto_empruntee = 0
