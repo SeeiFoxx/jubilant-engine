@@ -1,5 +1,5 @@
 import pygame
-import random
+import random, randint
 
 # Classe Monnaie, utilisée pour gérer les monnaies et les cryptomonnaies
 class Monnaie:
