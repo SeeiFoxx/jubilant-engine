@@ -243,7 +243,7 @@ def main_menu_init_temp():
 # Initialise le menu principal
 def main_menu_init():
     # Importe les variables
-    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock
+    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock, continuer
     global Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec 
     # Définition de la police de caractères
     police = pygame.font.Font('police.ttf', 25)
@@ -273,7 +273,7 @@ def main_menu_init():
 
 # Définition de la fonction principale
 def main_menu():
-    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock
+    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock, continuer
     global Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec
     # Boucle du jeu
     while continuer:
