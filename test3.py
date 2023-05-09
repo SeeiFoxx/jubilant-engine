@@ -49,13 +49,13 @@ class Monnaie:
                 ('Réglementation défavorable', -0.1),
                 ('Ton cousin Kevin en a acheté', -0.6),
                 ('Décision judiciaire favorable', 0.4),
-                ('Décision judiciaire défavorable', -0.15)
-                ('Elon Musk Tweete', 2)
-                ('POV tes parents découvrent ton wallet de 200K et tu dois tout vendre comme une certaine personne dans ce groupe', -0.7)
-                ('Innovation technologique de fou', 0.3)
-                ('Abdelmajid pirate Kyian et prends tout son argent', 0.5)
-                ('Kyian a ligoté Abdelmajid dans sa cave, il peut plus trader', -0.15)
-                ('Romain fait un trading copy de mon compte', 0.2)
+                ('Décision judiciaire défavorable', -0.15),
+                ('Elon Musk Tweete', 2),
+                ('POV tes parents découvrent ton wallet de 200K et tu dois tout vendre comme une certaine personne dans ce groupe', -0.7),
+                ('Innovation technologique de fou', 0.3),
+                ('Abdelmajid pirate Kyian et prends tout son argent', 0.5),
+                ('Kyian a ligoté Abdelmajid dans sa cave, il peut plus trader', -0.15),
+                ('Romain fait un trading copy de mon compte', 0.2),
                 ('Hugo vends des dessins de qualité en NFT', 0.45)
             ]
 
@@ -245,10 +245,10 @@ def main_menu_init():
     Ethereum = ("Ethereum", "ETH", 2000, 0.7)
     Litecoin = ("Litecoin", "LTC", 100, 1.4)
     Dogecoin = ("Dogecoin", "DOGE", 0.2, 5)
-    Shiba = ("Shiba", "INU", 2000, 50)
-    IOTA = ("IOTA", "ITA", 2000, 2.3)
-    Ergo = ("Ergo", "ERGLTC", 2000, 1.7)
-    Isotopec = ("Isotopec", "ISO", 2000, 2.7)
+    Shiba = ("Shiba", "INU", 0.02, 50)
+    IOTA = ("IOTA", "IOTA", 2.6, 2.3)
+    Ergo = ("Ergo", "ERGO", 14, 1.7)
+    Isotopec = ("Isotopec", "ISO", 0.009, 2.7)
     # Cyrpto dont le grpahe est actuellement affiché
     current_crypto = Bitcoin
     # Définition des variables pour la charte de trading
