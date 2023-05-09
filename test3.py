@@ -93,7 +93,7 @@ class Monnaie:
     def faire_varier_prix(self):
         # Si on a une volatilité (pas une fiat mdr) et que la monnaie n'est pas morte
         if self.volatilite > 0 and self.prix != 0:
-            variation = random.uniform(-self.volatilite, self.volatilite)
+            variation = random.uniform(-(self.volatilite/1000), (self.volatilite/1000))
             nouveau_prix = self.prix * (1 + variation)
             # Si le prix tombe à 0.00000 quelque chose, on considère que la monnaie est morte et on liquide tous les wallets.
             if round(nouveau_prix, 5) == 0:
