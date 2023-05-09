@@ -88,13 +88,20 @@ class Monnaie:
     
     # S'occupe de faire varier le prix d'une monnaie en fonction de sa volatilité
     def faire_varier_prix(self):
-        # Si on a une valatilité (pas une fiat mdr)
-        if self.volatilite > 0:
+        # Si on a une volatilité (pas une fiat mdr) et que la monnaie n'est pas morte
+        if self.volatilite > 0 and self.prix != 0:
             variation = random.uniform(-self.volatilite, self.volatilite)
             nouveau_prix = self.prix * (1 + variation)
-            self.historique_prix.pop(0)
-            self.historique_prix.append(nouveau_prix)
-            self.prix = nouveau_prix
+            # Si le prix tombe à 0.00000 quelque chose, on considère que la monnaie est morte et on liquide tous les wallets.
+            if round(nouveau_prix, 5) == 0:
+                self.prix = 0
+                self.portefeuille = 0
+                self.emprunt = 0
+                self.portefeuille_pycoin = 0
+            else:
+                self.historique_prix.pop(0)
+                self.historique_prix.append(nouveau_prix)
+                self.prix = nouveau_prix
     
     # Méthode pour emprunter
     def emprunt(self, monnaie, montant):
