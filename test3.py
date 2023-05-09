@@ -236,7 +236,7 @@ def main_menu_init():
     global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock
     global Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec 
     # Définition de la police de caractères
-    police = pygame.font.Font('police.ttf', 25, True, False)
+    police = pygame.font.Font('police.ttf', 25)
     # Création de toutes les cryptomononnaies
     liste_monnaies = [Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec]
     Dollar = Monnaie("Dollar", "USD", 1, 0)
