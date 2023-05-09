@@ -102,31 +102,31 @@ class Monnaie:
         # pas comme la plateforme FTX qui avait un "bug" dans laquelle les mecs piochaient en illimité,
         # aucune limite sur les "prêts" de leur propre exchange sur leurs comptes (ceux de Alameda Research,
         # leur entreprise perso quoi). Oui, on plagie les mecs qui ont fait faillite.
-		# Si on a pas assez de coins,
-		if montant > monnaie.portefeuille_pycoin:
-			# On retourne False pour montrer que la transaction a échoué
-			return(False)
-		# Si on a assez s'argent, on autorise le prêt
-		else:
-			monnaie.portefeuille_pycoin -= int(montant)
-			monnaie.portefeuille += int(montant)
-			monnaie.emprunte += int(montant)
-			# On retourne true pour montrer que la transaction a été validée
-			return(True)
+        # Si on a pas assez de coins,
+        if montant > monnaie.portefeuille_pycoin:
+            # On retourne False pour montrer que la transaction a échoué
+            return(False)
+        # Si on a assez s'argent, on autorise le prêt
+        else:
+            monnaie.portefeuille_pycoin -= int(montant)
+            monnaie.portefeuille += int(montant)
+            monnaie.emprunte += int(montant)
+            # On retourne true pour montrer que la transaction a été validée
+            return(True)
         
 	# Méthode pour rembourser un emprunt
-	def remboursement(self, monnaie, montant):
-		# Si on rends plus que ce qu'on a emprunté, ça crashe
-		if int(monnaie.emprunte) > int(montant):
-			return(False)
-		# Si on a pas le montant
-		elif monnaie.portefeuille < montant:
-			return(False)
-		else:
-			monnaie.emprunt -= int(montant)
-			monnaie.portfeuille_pycoin += int(montant)
-			monnaie.portefeuille -= int(montant)
-			return(True)
+    def remboursement(self, monnaie, montant):
+        # Si on rends plus que ce qu'on a emprunté, ça crashe
+        if int(monnaie.emprunte) > int(montant):
+            return(False)
+        # Si on a pas le montant
+        elif monnaie.portefeuille < montant:
+            return(False)
+        else:
+            monnaie.emprunt -= int(montant)
+            monnaie.portfeuille_pycoin += int(montant)
+            monnaie.portefeuille -= int(montant)
+            return(True)
 
 
     # Les gouvernements police tourner la planche à billet, c'est l'heure de l'inflation!
