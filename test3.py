@@ -304,7 +304,7 @@ def main_menu():
                 # Attends trois secondes, puis la notification disparait
                 pygame.time.wait(3000)
         # Affichage de l'interface utilisateur droite
-        pygame.draw.rect(screen, blanc, [-fenetre[0] / 2, 0, 100, fenetre[0]])
+        pygame.draw.rect(screen, blanc, [0, 0, 500, 1080])
         # Affichage des boutons des monnaies dans la barre
         i = 0
         for monnaie in liste_monnaies:
