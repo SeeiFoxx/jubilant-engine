@@ -189,14 +189,14 @@ def draw_player_screen(screen):
     # affiche le menu de gauche avec les portefeuilles
     pygame.draw.rect(screen, blanc, [0, 0, 450, fenetre[1]])
     text1 = police.render('Solde ...', True, noir)
-    screen.blit(text1, [fenetre[1] - 280, 25])
+    screen.blit(text1, [10, 25])
     text2 = police.render('Pycoin | Perso | Emprunté', True, noir)
-    screen.blit(text2, [fenetre[1] - 280, 50])
+    screen.blit(text2, [10, 50])
     # Affiche le solde de toutes les monnaies, à la fois dans le portefeuille de pycoin, et le portefeuille personnel
     i = 0
     for monnaie in liste_monnaies:
         text = police.render(str(monnaie.portefeuille_pycoin) + "$ " + str(monnaie.portefeuille) + "$ " + str(monnaie.emprunte), True, noir)
-        screen.blit(text, [fenetre[1] - 280, 100 + i * 50])
+        screen.blit(text, [10, 100 + i * 50])
         i += 1
     # Calcul de la somme des monnaies des cryptomonnaies, des fiat et du total, à la fois pycoin et perso et emprunté de pycoin
     somme_monaie_crypto = 0
@@ -216,13 +216,13 @@ def draw_player_screen(screen):
     total_emprunte = somme_monnaie_crypto_empruntee + somme_monnaie_fiat_empruntee
     # Affichage des totaux
     text = police.render('Total Crypto: ' + str(somme_monaie_crypto_pycoin) + "$ " + str(somme_monaie_crypto) + "$  " + str(monnaie.emprunte) + '$', True, noir)
-    screen.blit(text, [fenetre[1] - 280, 100 + i * 50])
+    screen.blit(text, [10, 100 + i * 50])
     i += 1
     text = police.render('Total Fiat: ' + str(somme_monnaie_fiat_pycoin) + '$ ' + str(somme_monnaie_fiat) + '$ ' + str(somme_monnaie_fiat_empruntee) + '$ ', True, noir)
-    screen.blit(text, [fenetre[1] - 280, 100 + i * 50])
+    screen.blit(text, [10, 100 + i * 50])
     i += 1
     text = police.render('Total: ' + str(total_pycoin) + '$ ' + str(total) + '$ ' + str(total_emprunte) + '$ ', True, noir)
-    screen.blit(text, [fenetre[1] - 280, 100 + i * 50])
+    screen.blit(text, [10, 100 + i * 50])
 
 
 # Temporaire, a effacer une fois le programme confirmé
