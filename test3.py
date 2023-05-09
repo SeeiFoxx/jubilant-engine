@@ -14,6 +14,8 @@ class Monnaie:
         self.volatilite = float(volatilite)
         # Un historique des prix est créé pour une visualisation facile.
         self.historique_prix = [prix_init] * 60
+        # Défini une première fois car on en a besoin pour dériver des prix plus tard
+        self.prix = prix_init
         # Faire varier le prix 60 fois pour que on ait une vraie charte au début
         for i in range(60):
         	self.faire_varier_prix()
