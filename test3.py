@@ -247,6 +247,7 @@ def main_menu_init():
     global Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec 
     # Définition de la police de caractères
     police = pygame.font.Font('police.ttf', 25)
+    police_bouton = pygame.font.Font('police.ttf', 35)
     # Création de toutes les cryptomononnaies
     Dollar = Monnaie("Dollar", "USD", 1, 0)
     Euro = Monnaie("Euro", "EUR", 1.2, 0)
@@ -306,11 +307,11 @@ def main_menu():
                 # Attends trois secondes, puis la notification disparait
                 pygame.time.wait(3000)
         # Affichage de l'interface utilisateur gauche
-        pygame.draw.rect(screen, blanc, [0, 0, 500, 1080])
+        pygame.draw.rect(screen, blanc, [0, 0, 250, 1080])
         # Affichage des boutons des monnaies dans la barre
         i = 0
         for monnaie in liste_monnaies:
-            monnaie_bouton = police.render(monnaie.nom_court, True, noir)
+            monnaie_bouton = police_bouton.render(monnaie.nom_court, True, noir)
             monnaie_bouton_rect = pygame.Rect(10, (50 + i * 50), monnaie_bouton.get_width() + 10, monnaie_bouton.get_height() + 10)
             pygame.draw.rect(screen, blanc, monnaie_bouton_rect, 0, 10)
             screen.blit(monnaie_bouton, (monnaie_bouton_rect.x + 5, monnaie_bouton_rect.y + 5))
