@@ -32,7 +32,7 @@ class Monnaie:
         # séparées de profits que je ferai avec ces emprunts plus tard.
         self.emprunte = 0
         # Si la volatilité est à 0, c'est une fiat qui subit l'inflation (fixée à 0.07% pour des raisons de simplicité)
-        if volatilite = 0:
+        if volatilite == 0:
             self.inflation = 0.07
             # Évènements de fiat
             self.events = [
