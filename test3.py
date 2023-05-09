@@ -14,8 +14,8 @@ class Monnaie:
         # Un historique des prix est créé pour une visualisation facile.
         self.historique_prix = [prix_init] * 60
         # Faire varier le prix 60 fois pour que on ait une vraie charte au début
-         for i in range(60):
-             self.faire_varier_prix()
+        for i in range(60):
+        	self.faire_varier_prix()
         # Le prix initial de la monnaie, formé à partir de l'historique des prix initiaux
         self.prix = float(chart[-1])
         # Le nombre d'unités de cette monnaie que l'on a, initialisé à 0
