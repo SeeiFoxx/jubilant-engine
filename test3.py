@@ -187,16 +187,16 @@ def draw_chart(screen, chart, color):
 # Définition de la fonction pour dessiner l'écran du joueur
 def draw_player_screen(screen):
     # affiche le menu de gauche avec les portefeuilles
-    pygame.draw.rect(screen, blanc, [1420, 0, 450, fenetre[1]])
+    pygame.draw.rect(screen, blanc, [fenetre[0]-450, 0, 450, fenetre[1]])
     text1 = police.render('Solde ...', True, noir)
-    screen.blit(text1, [10, 25])
+    screen.blit(text1, [fenetre[0]-440, 25])
     text2 = police.render('Pycoin | Perso | Emprunté', True, noir)
-    screen.blit(text2, [10, 50])
+    screen.blit(text2, [fenetre[0]-440, 50])
     # Affiche le solde de toutes les monnaies, à la fois dans le portefeuille de pycoin, et le portefeuille personnel
     i = 0
     for monnaie in liste_monnaies:
         text = police.render(str(monnaie.portefeuille_pycoin) + "$ " + str(monnaie.portefeuille) + "$ " + str(monnaie.emprunte), True, noir)
-        screen.blit(text, [10, 100 + i * 50])
+        screen.blit(text, [fenetre[0]-440, 100 + i * 50])
         i += 1
     # Calcul de la somme des monnaies des cryptomonnaies, des fiat et du total, à la fois pycoin et perso et emprunté de pycoin
     somme_monaie_crypto = 0
@@ -216,13 +216,13 @@ def draw_player_screen(screen):
     total_emprunte = somme_monnaie_crypto_empruntee + somme_monnaie_fiat_empruntee
     # Affichage des totaux
     text = police.render('Total Crypto: ' + str(somme_monaie_crypto_pycoin) + "$ " + str(somme_monaie_crypto) + "$  " + str(monnaie.emprunte) + '$', True, noir)
-    screen.blit(text, [10, 100 + i * 50])
+    screen.blit(text, [fenetre[0]-440, 100 + i * 50])
     i += 1
     text = police.render('Total Fiat: ' + str(somme_monnaie_fiat_pycoin) + '$ ' + str(somme_monnaie_fiat) + '$ ' + str(somme_monnaie_fiat_empruntee) + '$ ', True, noir)
-    screen.blit(text, [10, 100 + i * 50])
+    screen.blit(text, [fenetre[0]-440, 100 + i * 50])
     i += 1
     text = police.render('Total: ' + str(total_pycoin) + '$ ' + str(total) + '$ ' + str(total_emprunte) + '$ ', True, noir)
-    screen.blit(text, [10, 100 + i * 50])
+    screen.blit(text, [fenetre[0]-440, 100 + i * 50])
 
 
 # Temporaire, a effacer une fois le programme confirmé
@@ -296,7 +296,7 @@ def main_menu():
         for monnaie in liste_monnaies:
             monnaie.faire_varier_prix()
             monnaie.money_printer_go_brr()
-            event = monnaie.evenement_aleatoire() 
+            event = monnaie.evenement_aleatoire()
             # Si un évènement a eu lieu,
             if event != False:
                 notification = police.render("Évènement sur "+str(monnaie.nom_court)+":\n"+str(event[0])+"\nInfluence + "+str(event[1] * 100)+" %.", True, noir)
