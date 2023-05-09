@@ -17,7 +17,7 @@ class Monnaie:
         for i in range(60):
         	self.faire_varier_prix()
         # Le prix initial de la monnaie, formé à partir de l'historique des prix initiaux
-        self.prix = float(chart[-1])
+        self.prix = float(self.historique_prix[-1])
         # Le nombre d'unités de cette monnaie que l'on a, initialisé à 0
         self.portefeuille = 0
         # Le nombre d'unités de cette monnaie que le portefeuille des utilisateurs des services pycoins a actuellement.
