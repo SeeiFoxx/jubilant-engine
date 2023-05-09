@@ -323,7 +323,7 @@ def main_menu():
         draw_player_screen(screen)
 
         # Actualisation de la fenêtre de jeu
-        pygame.display.flip()
+        pygame.display.update()
 
         # Limite de rafraîchissement de la fenêtre de jeu
         clock.tick(0.3)
