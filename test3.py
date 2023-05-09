@@ -297,7 +297,7 @@ def main_menu():
         # Affichage des boutons des monnaies dans la barre
         i = 0
         for monnaie in liste_monnaies:
-            monnaie_bouton = police.render(, True, or_)
+            monnaie_bouton = police.render(monnaie.nom_court, True, or_)
             monnaie_bouton_rect = pygame.Rect(10, (50 + i * 50), monnaie_bouton.get_width() + 10, monnaie_bouton.get_height() + 10)
             pygame.draw.rect(screen, noir, monnaie_bouton_rect, 0, 10)
             screen.blit(monnaie_bouton, (monnaie_bouton_rect.x + 5, monnaie_bouton_rect.y + 5))
