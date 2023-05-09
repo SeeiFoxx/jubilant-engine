@@ -302,7 +302,7 @@ def main_menu():
             pygame.draw.rect(screen, noir, monnaie_bouton_rect, 0, 10)
             screen.blit(monnaie_bouton, (monnaie_bouton_rect.x + 5, monnaie_bouton_rect.y + 5))
             i += 1
-        
+       
         # Mise à jour du graphe
         chart.pop(0)
         chart.append(current_crypto.prix)
