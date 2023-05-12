@@ -39,27 +39,27 @@ class Monnaie:
             self.inflation = 0.07
             # Évènements de fiat
             self.events = [
-                ('Réglementation favorable', 0.1),
-                ('Attaque informatique', -0.2),
+                ('Réglementation favorable', True),
+                ('Attaque informatique', False),
             ]
         # Sinon, c'est une crypto qui subit une déflation (fixée à 0.1 = 10% par 50
-        # tours soit 0.2% par tour pour des raisons de simplicité)
+        # tours soit 0.2% par tour pour des raisons de simplicité, négative car l'inflation est enlevée)
         else:
             self.inflation = -0.1
             # Évènements de crypto (un peu exotiques...)
             self.events = [
-                ('Réglementation favorable', 0.3),
-                ('Réglementation défavorable', -0.1),
-                ('Ton cousin Kevin en a acheté', -0.6),
-                ('Décision judiciaire favorable', 0.4),
-                ('Décision judiciaire défavorable', -0.15),
-                ('Elon Musk Tweete', 2),
-                ('POV tes parents découvrent ton wallet de 200K et tu dois tout vendre comme une certaine personne dans ce groupe', -0.7),
-                ('Innovation technologique de fou', 0.3),
-                ('Abdelmajid pirate Kyian et prends tout son argent', 0.5),
-                ('Kyian a ligoté Abdelmajid dans sa cave, il peut plus trader', -0.15),
-                ('Romain fait un trading copy de mon compte', 0.2),
-                ('Hugo vends des dessins de qualité en NFT', 0.45)
+                ('Réglementation favorable', True),
+                ('Réglementation défavorable', False),
+                ('Ton cousin Kevin en a acheté', False),
+                ('Décision judiciaire favorable', True),
+                ('Décision judiciaire défavorable', False),
+                ('Elon Musk Tweete', True),
+                ('POV tes parents découvrent ton wallet de 200K et tu dois tout vendre comme une certaine personne dans ce groupe', False),
+                ('Innovation technologique de fou', True),
+                ('Abdelmajid pirate Kyian et prends tout son argent', True),
+                ('Kyian a ligoté Abdelmajid dans sa cave, il peut plus trader', False),
+                ('Romain fait un trading copy de mon compte', True),
+                ('Hugo vends des dessins de qualité en NFT', True)
             ]
 
     # Méthode pour acheter
@@ -93,7 +93,7 @@ class Monnaie:
     def faire_varier_prix(self):
         # Si on a une volatilité (pas une fiat mdr) et que la monnaie n'est pas morte
         if self.volatilite > 0 and self.prix != 0:
-            variation = random.uniform(-(self.volatilite/1000), (self.volatilite/1000))
+            variation = random.uniform(-(self.volatilite/10000), (self.volatilite/10000))
             nouveau_prix = self.prix * (1 + variation)
             # Si le prix tombe à 0.00000 quelque chose, on considère que la monnaie est morte et on liquide tous les wallets.
             if round(nouveau_prix, 5) == 0:
@@ -101,6 +101,14 @@ class Monnaie:
                 self.portefeuille = 0
                 self.emprunt = 0
                 self.portefeuille_pycoin = 0
+                # Si on a assez d'argent pour rembourser les coins que l'on avait emprunté, tout est déduit automatiquement
+                # du prix maximum parmi les 60 prix les plus anciens (prix asumé d'achat)
+                a_rembourser = (self.emprunte * max(self.historique_prix[0]))
+                if Dollar.portefeuille > a_rembourser:
+                    Dollar.portefeuille -= a_rembourser
+                # Sinon, on finit comme FTX
+                else:
+                    FTX_scenario()
             else:
                 self.historique_prix.pop(0)
                 self.historique_prix.append(nouveau_prix)
@@ -160,14 +168,17 @@ class Monnaie:
     def evenement_aleatoire(self):
         if self.event_countdown == 0:
             # Choisit un évènement au hasard
-            evenement = random.choices(self.evenements, [p for e, p in self.evenements])[0]
-            variation = evenement[1]
-            # Calcule le nouveau prix après l'évènement
-            nouveau_prix = self.prix * (1 + variation)
-            # Applique le prix
+            randomnumber = randint(0, len(self.evenements)-1)
+            evenement = self.evenements[randomnumber]
+            # Si la variation doit être positive, on fait varier le prix aléatoirement
+            # dans le positif entre 0 et 10%
+            if variation == True:
+                self.prix += self.prix * (randint(0, 10)/100)
+            else:
+                self.prix -= self.prix * (randint(0, 10)/100)
+            # Applique le prix dans l'historique
             self.historique_prix.pop(0)
-            self.historique_prix.append(nouveau_prix)
-            self.prix = nouveau_prix
+            self.historique_prix.append(self.prix)
             # Nouveau compteur
             self.event_countdown = 20
             # Retourne l'évènement joué
@@ -274,7 +285,7 @@ def main_menu_init():
 
 # Définition de la fonction principale
 def main_menu():
-    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock, continuer, police_bouton, liste_boutons
+    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock, continuer, police_bouton, liste_boutons_rect
     global Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec
     # Boucle du jeu
     while continuer:
@@ -286,9 +297,9 @@ def main_menu():
                 exit()
             elif event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                for i in range(len(liste_boutons)):
+                for i in range(len(liste_boutons_rect)):
                     # Si l'utilisateur clique sur un bouton de monnaie, on passe à cette monnaie
-                    if liste_boutons[i].collidepoint(event.pos):
+                    if liste_boutons_rect[i].collidepoint(event.pos):
                         current_crypto = liste_monnaies[i]
                         chart = current_crypto.historique_prix
                         chart[-1] = current_crypto.prix
@@ -299,6 +310,8 @@ def main_menu():
             monnaie.faire_varier_prix()
             monnaie.money_printer_go_brr()
             event = monnaie.evenement_aleatoire()
+            #Test
+            print("Event"+str(event))
             # Si un évènement a eu lieu, affiche une notification
             if event != False:
                 notification = police.render("Évènement sur "+str(monnaie.nom_court)+":\n"+str(event[0])+"\nInfluence + "+str(event[1] * 100)+" %.", True, or_)
@@ -311,20 +324,33 @@ def main_menu():
         pygame.draw.rect(screen, blanc, [0, 0, 250, 1080])
         # Affichage des boutons des monnaies dans la barre à gauche de l'écran
         usd_bouton = police_bouton.render(Dollar.nom_court, True, blanc)
+        usd_bouton_rect = pygame.Rect(10, (1 * 75), usd_bouton.get_width() + 10, usd_bouton.get_height() + 10)
         eur_bouton = police_bouton.render(Euro.nom_court, True, blanc)
+        eur_bouton_rect = pygame.Rect(10, (2 * 75), eur_bouton.get_width() + 10, eur_bouton.get_height() + 10)
         btc_bouton = police_bouton.render(Bitcoin.nom_court, True, blanc)
+        btc_bouton_rect = pygame.Rect(10, (3 * 75), btc_bouton.get_width() + 10, btc_bouton.get_height() + 10)
         eth_bouton = police_bouton.render(Ethereum.nom_court, True, blanc)
+        eth_bouton_rect = pygame.Rect(10, (4 * 75), eth_bouton.get_width() + 10, eth_bouton.get_height() + 10)
         ltc_bouton = police_bouton.render(Litecoin.nom_court, True, blanc)
+        ltc_bouton_rect = pygame.Rect(10, (5 * 75), ltc_bouton.get_width() + 10, ltc_bouton.get_height() + 10)
         doge_bouton = police_bouton.render(Dogecoin.nom_court, True, blanc)
+        doge_bouton_rect = pygame.Rect(10, (6 * 75), doge_bouton.get_width() + 10, doge_bouton.get_height() + 10)
         shib_bouton = police_bouton.render(Shiba.nom_court, True, blanc)
+        shib_bouton_rect = pygame.Rect(10, (7 * 75), shib_bouton.get_width() + 10, shib_bouton.get_height() + 10)
         iota_bouton = police_bouton.render(IOTA.nom_court, True, blanc)
+        iota_bouton_rect = pygame.Rect(10, (8 * 75), iota_bouton.get_width() + 10, iota_bouton.get_height() + 10)
         ergo_bouton = police_bouton.render(Ergo.nom_court, True, blanc)
-        isotopec_bouton = police_bouton.render(Isotopec.nom_court, True, blanc)
-        liste_boutons = [usd_bouton, eur_bouton, btc_bouton, eth_bouton, ltc_bouton, doge_bouton, shib_bouton, iota_bouton, ergo_bouton, isotopec_bouton]
+        ergo_bouton_rect = pygame.Rect(10, (9 * 75), ergo_bouton.get_width() + 10, ergo_bouton.get_height() + 10)
+        iso_bouton = police_bouton.render(Isotopec.nom_court, True, blanc)
+        iso_bouton_rect = pygame.Rect(10, (10 * 75), iso_bouton.get_width() + 10, iso_bouton.get_height() + 10)
+        liste_boutons = [usd_bouton, eur_bouton, btc_bouton, eth_bouton, ltc_bouton, doge_bouton, shib_bouton, iota_bouton, ergo_bouton, iso_bouton]
+        liste_boutons_rect = [usd_bouton_rect, eur_bouton_rect, btc_bouton_rect, eth_bouton_rect, ltc_bouton_rect, doge_bouton_rect, shib_bouton_rect, iota_bouton_rect, ergo_bouton_rect, iso_bouton_rect]
         # Affiche tous les boutons
-        for i in range(len(liste_boutons)):
+        for i in range(len(liste_boutons_rect)):
+            # Définition du bouton et du rectangle de position du bouton
             bouton = liste_boutons[i]
-            bouton_rect = pygame.Rect(10, (75 + i * 75), bouton.get_width() + 10, bouton.get_height() + 10)
+            bouton_rect = liste_boutons_rect[i]
+            # Affichage du rectangle et du bouton
             pygame.draw.rect(screen, noir, bouton_rect, 0, 10)
             screen.blit(bouton, (bouton_rect.x + 5, bouton_rect.y + 5))
         # Mise à jour du graphe
