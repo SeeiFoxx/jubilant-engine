@@ -274,7 +274,7 @@ def main_menu_init():
 
 # Définition de la fonction principale
 def main_menu():
-    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock, continuer, police_bouton
+    global noir, blanc, or_, police, fenetre, liste_monnaies, current_crypto, screen, chart, clock, continuer, police_bouton, liste_boutons
     global Dollar, Euro, Bitcoin, Ethereum, Litecoin, Dogecoin, Shiba, IOTA, Ergo, Isotopec
     # Boucle du jeu
     while continuer:
@@ -286,11 +286,12 @@ def main_menu():
                 exit()
             elif event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                # Si l'utilisateur clique sur un bouton de monnaie, on passe à cette monnaie
-                if X:
-                    current_crypto = X
-                    chart = current_crypto.historique_prix
-                    chart[-1] = current_crypto.prix
+                for i in range(len(liste_boutons)):
+                    # Si l'utilisateur clique sur un bouton de monnaie, on passe à cette monnaie
+                    if liste_boutons[i].collidepoint(event.pos):
+                        current_crypto = liste_monnaies[i]
+                        chart = current_crypto.historique_prix
+                        chart[-1] = current_crypto.prix
         # Réinitialise l'écran
         screen.fill(noir)
         # Mise à jour du prix de chaque monnaie, de l'inflation et des évènements
@@ -298,25 +299,34 @@ def main_menu():
             monnaie.faire_varier_prix()
             monnaie.money_printer_go_brr()
             event = monnaie.evenement_aleatoire()
-            # Si un évènement a eu lieu,
+            # Si un évènement a eu lieu, affiche une notification
             if event != False:
-                notification = police.render("Évènement sur "+str(monnaie.nom_court)+":\n"+str(event[0])+"\nInfluence + "+str(event[1] * 100)+" %.", True, noir)
+                notification = police.render("Évènement sur "+str(monnaie.nom_court)+":\n"+str(event[0])+"\nInfluence + "+str(event[1] * 100)+" %.", True, or_)
                 notification_rect = pygame.Rect(int((fenetre[0] - notification.get_width()) / 2), 25, notification.get_width() + 25, notification.get_height() + 25)
-                pygame.draw.rect(screen, blanc, notification_rect, 0, 25)
+                pygame.draw.rect(screen, noir, notification_rect, 0, 25)
                 screen.blit(notification, (notification_rect.x + 5, notification_rect.y + 5))
                 # Attends trois secondes, puis la notification disparait
                 pygame.time.wait(3000)
         # Affichage de l'interface utilisateur gauche
         pygame.draw.rect(screen, blanc, [0, 0, 250, 1080])
-        # Affichage des boutons des monnaies dans la barre
-        i = 0
-        for monnaie in liste_monnaies:
-            monnaie_bouton = police_bouton.render(monnaie.nom_court, True, blanc)
-            monnaie_bouton_rect = pygame.Rect(10, (75 + i * 75), monnaie_bouton.get_width() + 10, monnaie_bouton.get_height() + 10)
-            pygame.draw.rect(screen, noir, monnaie_bouton_rect, 0, 10)
-            screen.blit(monnaie_bouton, (monnaie_bouton_rect.x + 5, monnaie_bouton_rect.y + 5))
-            i += 1
-       
+        # Affichage des boutons des monnaies dans la barre à gauche de l'écran
+        usd_bouton = police_bouton.render(Dollar.nom_court, True, blanc)
+        eur_bouton = police_bouton.render(Euro.nom_court, True, blanc)
+        btc_bouton = police_bouton.render(Bitcoin.nom_court, True, blanc)
+        eth_bouton = police_bouton.render(Ethereum.nom_court, True, blanc)
+        ltc_bouton = police_bouton.render(Litecoin.nom_court, True, blanc)
+        doge_bouton = police_bouton.render(Dogecoin.nom_court, True, blanc)
+        shib_bouton = police_bouton.render(Shiba.nom_court, True, blanc)
+        iota_bouton = police_bouton.render(IOTA.nom_court, True, blanc)
+        ergo_bouton = police_bouton.render(Ergo.nom_court, True, blanc)
+        isotopec_bouton = police_bouton.render(Isotopec.nom_court, True, blanc)
+        liste_boutons = [usd_bouton, eur_bouton, btc_bouton, eth_bouton, ltc_bouton, doge_bouton, shib_bouton, iota_bouton, ergo_bouton, isotopec_bouton]
+        # Affiche tous les boutons
+        for i in range(len(liste_boutons)):
+            bouton = liste_boutons[i]
+            bouton_rect = pygame.Rect(10, (75 + i * 75), bouton.get_width() + 10, bouton.get_height() + 10)
+            pygame.draw.rect(screen, noir, bouton_rect, 0, 10)
+            screen.blit(bouton, (bouton_rect.x + 5, bouton_rect.y + 5))
         # Mise à jour du graphe
         chart.pop(0)
         chart.append(current_crypto.prix)
