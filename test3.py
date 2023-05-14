@@ -260,8 +260,10 @@ def main_menu_init_temp():
 
 def FTX_scenario():
     global blanc, noir, or_, police, fenetre, screen
+    # Définition de la police
+    police = pygame.font.Font('police.ttf', 25)
      # Chargement des images
-    images = [pygame.image.load("image1.png"), pygame.image.load("image2.png"), pygame.image.load("image3.png")]
+    images = [pygame.image.load("FTX_scenario_1.jpg"), pygame.image.load("FTX_scenario_2.jpg"), pygame.image.load("FTX_scenario_3.jpg")]
     # Choix aléatoire d'une image
     image_index = random.randint(0, 2)
     image = images[image_index]
@@ -312,8 +314,6 @@ def FTX_scenario():
         screen.blit(replay_text, replay_text_rect)
         # Mise à jour de l'affichage
         pygame.display.update()
-
-
 
 
 # Initialise le menu principal
