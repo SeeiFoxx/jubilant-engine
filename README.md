@@ -16,4 +16,6 @@ Sous windows, installez la dernière version de python [ici](https://www.python.
 python -m pip install pygame moviepy
 ```
 
+Vous pouvez exécuter d'abord `main.py` pour voir notre introduction, puis `main_interface.py` pour tester l'interface graphique qui n'a pas été finie.
+
 Bonne aventure!
