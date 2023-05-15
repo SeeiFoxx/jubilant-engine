@@ -415,40 +415,27 @@ def main_menu():
         if FTX_scenario_ok == 1:
             FTX_scenario()
         # Affichage de l'interface utilisateur gauche
-        pygame.draw.rect(screen, noir, [0, 0, 250, 1080])
-        # Affiche le sélecteur de cryptos pour vendre
-        # Options pour le sélecteur
-        options = [monnaie.nom for monnaie in liste_monnaies]
-        # Position du sélecteur
-        selector_x = fenetre[0] - 200
-        selector_y = 50
-        # Position des boutons
-        button_x = fenetre[0]  - 200
-        button_y1 = 200
-        button_y2 = 300
-        # Taille des boutons
-        button_width = 150
-        button_height = 50
-        pygame.draw.rect(screen, or_, (selector_x, selector_y, 150, 50))
-        selector = police.render("Crypto à vendre", True, blanc)
-        screen.blit(selector, (selector_x + 25, selector_y + 10))
-        # Affichage des options dans le sélecteur
-        for i, option in enumerate(options):
-            option_y = selector_y + 50 + (i * 25)
-            pygame.draw.rect(screen, noir, (selector_x, option_y, 150, 25))
-            text = police.render(option, True, or_)
-            screen.blit(text, (selector_x + 10, option_y + 5))
-        # Affichage des boutons vendre et acheter
-        pygame.draw.rect(screen, (255, 0, 0), (button_x, button_y1, button_width, button_height))
-        text = police.render("Vendre", True, blanc)
-        screen.blit(text, (button_x + 25, button_y1 + 10))
-        pygame.draw.rect(screen, (0, 255, 0), (button_x, button_y2, button_width, button_height))
-        text = police.render("Acheter", True, blanc)
-        screen.blit(text, (button_x + 25, button_y2 + 10))
+        pygame.draw.rect(screen, blanc, [0, 0, 250, 1080])
+        # Affichage boutons acheter / vendre
+        bouton_acheter = police_bouton.render("Acheter", True, blanc)
+        bouton_acheter_rect = pygame.Rect(350, 0.9 * fenetre[1], bouton_acheter.get_width() + 10, bouton_acheter.get_height() + 10)
+        bouton_vendre= police_bouton.render("Vendre", True, blanc)
+        bouton_vendre_rect = pygame.Rect(350, 0.9 * fenetre[1] + bouton_acheter.get_width(), bouton_vendre.get_width() + 10, bouton_vendre.get_height() + 10)
+        pygame.draw.rect(screen, noir, bouton_acheter_rect, 0, 10)
+        screen.blit(bouton_acheter, (bouton_acheter_rect.x + 5, bouton_acheter_rect.y + 5))
+        pygame.draw.rect(screen, noir, bouton_vendre_rect, 0, 10)
+        screen.blit(bouton_vendre, (bouton_vendre_rect.x + 5, bouton_vendre_rect.y + 5))
+
+##END TEST
+
         # Regénère le bouton avec le bon prix de la monnaie
         for i in range(len(liste_boutons)):
             liste_boutons[i] = police_bouton.render(liste_monnaies[i].nom_court+str(" : ")+str(liste_monnaies[i].prix)+" $", True, blanc)
-        # Affcihe tous les boutons avec les prix des cryptos
+        # Affiche tous les boutons avec les prix des cryptos
+        text_avant_monnaies = police.render("Monnaie: Prix à l'unité en $", True, noir)
+        text_avant_monnaies_rect = text_avant_monnaies.get_rect()
+        text_avant_monnaies_rect.center = (45, 25)
+        screen.blit(text_avant_monnaies, text_avant_monnaies_rect)
         for i in range(len(liste_boutons_rect)):
             # Définition du bouton et du rectangle de position du bouton
             bouton = liste_boutons[i]
