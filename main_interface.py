@@ -418,16 +418,13 @@ def main_menu():
         pygame.draw.rect(screen, blanc, [0, 0, 250, 1080])
         # Affichage boutons acheter / vendre
         bouton_acheter = police_bouton.render("Acheter", True, blanc)
-        bouton_acheter_rect = pygame.Rect(350, 0.9 * fenetre[1], bouton_acheter.get_width() + 10, bouton_acheter.get_height() + 10)
+        bouton_acheter_rect = pygame.Rect(fenetre[0] * 0.65, 0.9 * fenetre[1], bouton_acheter.get_width() + 10, bouton_acheter.get_height() + 10)
         bouton_vendre= police_bouton.render("Vendre", True, blanc)
-        bouton_vendre_rect = pygame.Rect(350, 0.9 * fenetre[1] + bouton_acheter.get_width(), bouton_vendre.get_width() + 10, bouton_vendre.get_height() + 10)
-        pygame.draw.rect(screen, noir, bouton_acheter_rect, 0, 10)
+        bouton_vendre_rect = pygame.Rect(fenetre[0] * 0.65 - 150, 0.9 * fenetre[1], bouton_acheter.get_width()+ 10, bouton_vendre.get_height() + 10)
+        pygame.draw.rect(screen, (0, 255, 0), bouton_acheter_rect, 0, 5)
         screen.blit(bouton_acheter, (bouton_acheter_rect.x + 5, bouton_acheter_rect.y + 5))
-        pygame.draw.rect(screen, noir, bouton_vendre_rect, 0, 10)
+        pygame.draw.rect(screen, (255, 0, 0), bouton_vendre_rect, 0, 5)
         screen.blit(bouton_vendre, (bouton_vendre_rect.x + 5, bouton_vendre_rect.y + 5))
-
-##END TEST
-
         # Regénère le bouton avec le bon prix de la monnaie
         for i in range(len(liste_boutons)):
             liste_boutons[i] = police_bouton.render(liste_monnaies[i].nom_court+str(" : ")+str(liste_monnaies[i].prix)+" $", True, blanc)
